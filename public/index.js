@@ -176,7 +176,7 @@ function first(){
 				}
 				events[i].commission.insurance=((30*events[i].price)/100)/2;
 				events[i].commission.treasury=events[i].persons;
-				events[i].commission.privateaser=events[i].price-(events[i].commission.insurance+events[i].commission.treasury);
+				events[i].commission.privateaser=((30*events[i].price)/100)-(events[i].commission.insurance+events[i].commission.treasury);
 				if (events[i].options.deductibleReduction==true)
 				{
 					events[i].price+=events[i].persons;
@@ -186,7 +186,27 @@ function first(){
 		}
 	}
 }
+function five(){
+	var i;
+	for(i=0;i<actors.length;i++)
+	{
+		var j;
+		for(j=0;j<events.length;j++)
+		{
+			if (events[j].id==actors[i].eventId)
+			{
+				var commissionTot=events[j].commission.insurance+events[j].commission.treasury+events[j].commission.privateaser;
+				actors[i].payment[0].amount=events[j].price;
+				actors[i].payment[1].amount=(events[j].price)-commissionTot;
+				actors[i].payment[2].amount=events[j].commission.insurance;
+				actors[i].payment[3].amount=events[j].commission.treasury;
+				actors[i].payment[4].amount=events[j].commission.privateaser;
+			}
+		}
+	}
+}
 first();
+five();
 console.log;
 console.log(bars);
 console.log(events);
