@@ -156,6 +156,24 @@ function first(){
 			if(events[i].barId==bars[j].id)
 			{
 				events[i].price=events[i].persons*bars[j].pricePerPerson+events[i].time*bars[j].pricePerHour;
+				if(events[i].persons>10)
+				{
+					if(events[i].persons>20)
+					{
+						if(events[i].persons>60)
+						{
+							events[i].price=events[i].price-((50*events[i].price)/100);
+						}
+						else
+						{
+							events[i].price=events[i].price-((30*events[i].price)/100);
+						}
+					}
+					else
+					{
+						events[i].price=events[i].price-((10*events[i].price)/100);
+					}
+				}
 			}
 		}
 	}
