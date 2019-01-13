@@ -177,7 +177,11 @@ function first(){
 				events[i].commission.insurance=((30*events[i].price)/100)/2;
 				events[i].commission.treasury=events[i].persons;
 				events[i].commission.privateaser=events[i].price-(events[i].commission.insurance+events[i].commission.treasury);
-				
+				if (events[i].options.deductibleReduction==true)
+				{
+					events[i].price+=events[i].persons;
+					events[i].commission.privateaser+=events[i].persons;
+				}
 			}
 		}
 	}
